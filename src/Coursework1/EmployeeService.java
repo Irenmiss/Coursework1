@@ -1,20 +1,14 @@
 package Coursework1;
 
-import java.util.Arrays;
-
 public class EmployeeService {
-    public Employee[] employee = new Employee[10];
-    private double sumInMonth;
-    private double averageSum;
-    private double minSalary;
-    private double maxSalary;
-
 
     public double countTotalMonthlyStaffCosts(Employee[] employee) {
+        double sumInMonth = 0;
         for (int i = 0; i < employee.length; i++) {
-            if (employee[i] != null) {
-                sumInMonth += employee[i].getSalary();
+            if (employee[i] == null) {
+                continue;
             }
+            sumInMonth += employee[i].getSalary();
         }
         return sumInMonth;
     }
@@ -24,16 +18,14 @@ public class EmployeeService {
     }
 
     public double countAverageSum(Employee[] employee) {
-        int count = 0;
+        int counter = 0;
+        double averageSum;
         for (int i = 0; i < employee.length; i++) {
-            if (employee[i] == null) {
-                continue;
-            }
-            {
-                count++;
-                averageSum = sumInMonth / count;
+            if (employee[i] != null) {
+                counter++;
             }
         }
+        averageSum = countTotalMonthlyStaffCosts(employee) / counter;
         return averageSum;
     }
 
@@ -42,6 +34,7 @@ public class EmployeeService {
     }
 
     public double findMinimumSalary(Employee[] employee) {
+        double minSalary = 0;
         minSalary = employee[0].getSalary();
         for (int i = 0; i < employee.length; i++) {
             if (employee[i] != null) {
@@ -57,7 +50,7 @@ public class EmployeeService {
         for (int i = 0; i < employee.length; i++) {
             if (employee[i] != null) {
                 findMinimumSalary(employee);
-                if (employee[i].getSalary() == minSalary) {
+                if (employee[i].getSalary() == findMinimumSalary(employee)) {
                     System.out.println("Минимальная заработная плата составляет: " + findMinimumSalary(employee) + " рублей у сотрудника " + employee[i].getEmployeeName());
                 }
             }
@@ -65,6 +58,7 @@ public class EmployeeService {
     }
 
     public double findMaximumSalary(Employee[] employee) {
+        double maxSalary = 0;
         maxSalary = employee[0].getSalary();
         for (int i = 0; i < employee.length; i++) {
             if (employee[i] == null) {
@@ -81,7 +75,7 @@ public class EmployeeService {
         for (int i = 0; i < employee.length; i++) {
             if (employee[i] != null) {
                 findMaximumSalary(employee);
-                if (employee[i].getSalary() == maxSalary) {
+                if (employee[i].getSalary() == findMaximumSalary(employee)) {
                     System.out.println("Максимальная заработная плата составляет: " + findMaximumSalary(employee) + " рублей у сотрудника " + employee[i].getEmployeeName());
                 }
             }
